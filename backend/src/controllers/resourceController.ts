@@ -251,6 +251,8 @@ export const generateResourcesForTopic = asyncHandler(
 
       await topic.save();
 
+      redisClient.del([`topic/${topic.slug}`]);
+
       res.status(201).json(savedResources);
     } catch (error) {
       console.error("Error generating resources:", error);
